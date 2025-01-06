@@ -1,0 +1,9 @@
+name: MeowBattle
+version: '1.0-SNAPSHOT'
+main: cn.meowdream.meowBattle.MeowBattle
+api-version: '1.21'
+commands:
+  battle:
+    description: control the battle game
+    usage: /<command> ...
+    permission: battle.restart
