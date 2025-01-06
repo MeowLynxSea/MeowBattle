@@ -53,14 +53,22 @@ public class BattleWorld {
 //            }
 //        }
 
+//        Bukkit.broadcastMessage("Moving walls...");
+
         BlockData data = Material.RED_STAINED_GLASS.createBlockData();
 
         Location bLocation = worldBorder.getCenter();
 
+//        Bukkit.broadcastMessage("bLocation: " + bLocation);
+//
+//        Bukkit.broadcastMessage("Wall1 Pos BEFORE: " + wall1.getLocation().getX() + " " + wall1.getLocation().getY() + " " + wall1.getLocation().getZ());
+//        Bukkit.broadcastMessage("Trying to tp to: " + new Location(world, bLocation.getX() - worldBorder.getSize() / 2, world.getMaxHeight(), bLocation.getZ() - worldBorder.getSize() / 2));
         wall1.setViewRange(Float.MAX_VALUE);
         wall1.setTransformation(new Transformation(new Vector3f(), new AxisAngle4f(), new Vector3f((float) worldBorder.getSize(), -(float) (world.getMaxHeight() - baseY), 0), new AxisAngle4f()));
         wall1.teleport(new Location(world, bLocation.getX() - worldBorder.getSize() / 2, world.getMaxHeight(), bLocation.getZ() - worldBorder.getSize() / 2));
         wall1.setBlock(data);
+
+//        Bukkit.broadcastMessage("Wall1 Pos AFTER: " + wall1.getLocation().getX() + " " + wall1.getLocation().getY() + " " + wall1.getLocation().getZ());
 
         wall2.setViewRange(Float.MAX_VALUE);
         wall2.setTransformation(new Transformation(new Vector3f(), new AxisAngle4f(), new Vector3f((float) worldBorder.getSize(), -(float) (world.getMaxHeight() - baseY), 0), new AxisAngle4f()));
@@ -132,6 +140,7 @@ public class BattleWorld {
             }
             if(world != null) {
                 createParticleWall(worldBorder.getCenter().getX() - worldBorder.getSize() / 2, worldBorder.getCenter().getZ() - worldBorder.getSize() / 2, worldBorder.getCenter().getX() + worldBorder.getSize() / 2, worldBorder.getCenter().getZ() + worldBorder.getSize() / 2);
+//                Bukkit.broadcastMessage("Wall1 Pos: " + wall1.getLocation().getX() + " " + wall1.getLocation().getY() + " " + wall1.getLocation().getZ());
             }
         }
     };
@@ -199,11 +208,6 @@ public class BattleWorld {
             player.setResourcePack("http://ys-n.ysepan.com/wap/meowlynxsea/A2BcPlIE3EGQ6JeAeQ/kDN3lgB,AB52M5yRa48aV7EQ3yge8/MeowBattle.zip");
         }
 
-        wall1 = (BlockDisplay) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BLOCK_DISPLAY);
-        wall2 = (BlockDisplay) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BLOCK_DISPLAY);
-        wall3 = (BlockDisplay) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BLOCK_DISPLAY);
-        wall4 = (BlockDisplay) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BLOCK_DISPLAY);
-
         //borderChangeTasks中最后一个任务的size必须为0
         if(!borderChangeTasks.isEmpty()) {
             borderChangeTasks.getLast().size = 0;
@@ -263,6 +267,11 @@ public class BattleWorld {
     }
 
     public void startBorderChange() {
+        wall1 = (BlockDisplay) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BLOCK_DISPLAY);
+        wall2 = (BlockDisplay) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BLOCK_DISPLAY);
+        wall3 = (BlockDisplay) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BLOCK_DISPLAY);
+        wall4 = (BlockDisplay) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BLOCK_DISPLAY);
+
         renderTask = renderer.runTaskTimer(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("MeowBattle")), 0, 2);
         soundManagerTask = soundManager.runTaskTimer(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("MeowBattle")), 0, 7);
 

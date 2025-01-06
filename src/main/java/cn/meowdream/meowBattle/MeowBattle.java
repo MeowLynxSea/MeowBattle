@@ -33,7 +33,7 @@ public final class MeowBattle extends JavaPlugin {
         public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
             if (sender instanceof Player) {
                 if(args.length == 1) {
-                    if (Objects.equals(args[0], "start")) {
+                    if (Objects.equals(args[0], "init")) {
                         List<borderChangeTask> borderChangeTasks = new ArrayList<>();
                         borderChangeTasks.add(new borderChangeTask(10, 8, 0.75, 0.5));
                         borderChangeTasks.add(new borderChangeTask(30, 8, 0.45, 1));
@@ -41,6 +41,8 @@ public final class MeowBattle extends JavaPlugin {
                         borderChangeTasks.add(new borderChangeTask(70, 15, 0, 2.5));
                         World world = Objects.requireNonNull(Bukkit.getWorld("world"));
                         battleWorld = new BattleWorld(world, new Location(world,495, 0, 210), new Location(world, 595, 0, 310), 0, borderChangeTasks);
+//                        battleWorld.startBorderChange();
+                    } else if(Objects.equals(args[0], "start")) {
                         battleWorld.startBorderChange();
                     } else if (Objects.equals(args[0], "stop")) {
                         battleWorld.stopAllActivities();
